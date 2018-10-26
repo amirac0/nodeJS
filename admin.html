@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <style>
+        @import url('https://use.fontawesome.com/releases/v5.0.13/css/all.css');
+        @font-face {
+            font-family: 'Lato';
+            font-style: normal;
+            font-weight: 300;
+            src: local('Lato Light'), local('Lato-Light'), url(https://fonts.gstatic.com/s/lato/v14/S6u9w4BMUTPHh7USSwiPHA.ttf) format('truetype');
+        }
+        
+        @font-face {
+            font-family: 'Lato';
+            font-style: normal;
+            font-weight: 400;
+            src: local('Lato Regular'), local('Lato-Regular'), url(https://fonts.gstatic.com/s/lato/v14/S6uyw4BMUTPHjx4wWw.ttf) format('truetype');
+        }
+        
+        @font-face {
+            font-family: 'Lato';
+            font-style: normal;
+            font-weight: 700;
+            src: local('Lato Bold'), local('Lato-Bold'), url(https://fonts.gstatic.com/s/lato/v14/S6u9w4BMUTPHh6UVSwiPHA.ttf) format('truetype');
+        }
+        
+        *,
+        *:before,
+        *:after {
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: #f5f5f5;
+            padding: 0;
+            margin: 0;
+            font-family: 'Lato', sans-serif;
+        }
+        
+        i.fa {
+            font-size: 16px;
+        }
+        
+        p {
+            font-size: 16px;
+            line-height: 1.42857143;
+        }
+        
+        .header {
+            position: fixed;
+            z-index: 10;
+            top: 0;
+            left: 0;
+            background: #161e3c;
+            width: 100%;
+            height: 50px;
+            line-height: 50px;
+            color: #fff;
+        }
+        
+        .header .logo {
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .header #menu-action {
+            display: block;
+            float: left;
+            width: 60px;
+            height: 50px;
+            line-height: 50px;
+            margin-right: 15px;
+            color: #fff;
+            text-decoration: none;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.15);
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            -webkit-transition: all 0.2s ease-in-out;
+            transition: all 0.2s ease-in-out;
+        }
+        
+        .header #menu-action i {
+            display: inline-block;
+            margin: 0 5px;
+        }
+        
+        .header #menu-action span {
+            width: 0px;
+            display: none;
+            overflow: hidden;
+            -webkit-transition: all 0.2s ease-in-out;
+            transition: all 0.2s ease-in-out;
+        }
+        
+        .header #menu-action:hover {
+            background: rgba(0, 0, 0, 0.25);
+        }
+        
+        .header #menu-action.active {
+            width: 250px;
+            -webkit-transition: all 0.2s ease-in-out;
+            transition: all 0.2s ease-in-out;
+        }
+        
+        .header #menu-action.active span {
+            display: inline;
+            width: auto;
+            -webkit-transition: all 0.2s ease-in-out;
+            transition: all 0.2s ease-in-out;
+        }
+        
+        .sidebar {
+            position: fixed;
+            z-index: 10;
+            left: 0;
+            top: 50px;
+            height: 100%;
+            width: 60px;
+            background: #fff;
+            border-right: 1px solid #ddd;
+            text-align: center;
+            -webkit-transition: all 0.2s ease-in-out;
+            transition: all 0.2s ease-in-out;
+        }
+        
+        .sidebar:hover,
+        .sidebar.active,
+        .sidebar.hovered {
+            width: 250px;
+            -webkit-transition: all 0.2s ease-in-out;
+            transition: all 0.2s ease-in-out;
+        }
+        
+        .sidebar ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .sidebar ul li {
+            display: block;
+        }
+        
+        .sidebar ul li a {
+            display: block;
+            position: relative;
+            white-space: nowrap;
+            overflow: hidden;
+            border-bottom: 1px solid #ddd;
+            color: #444;
+            text-align: left;
+        }
+        
+        .sidebar ul li a i {
+            display: inline-block;
+            width: 60px;
+            height: 60px;
+            line-height: 60px;
+            text-align: center;
+            -webkit-animation-duration: 0.7s;
+            -moz-animation-duration: 0.7s;
+            -o-animation-duration: 0.7s;
+            animation-duration: 0.7s;
+            -webkit-animation-fill-mode: both;
+            -moz-animation-fill-mode: both;
+            -o-animation-fill-mode: both;
+            animation-fill-mode: both;
+        }
+        
+        .sidebar ul li a span {
+            display: inline-block;
+            height: 60px;
+            line-height: 60px;
+        }
+        
+        .sidebar ul li a:hover {
+            background-color: #eee;
+        }
+        
+        .sidebar ul li a:hover i {
+            -webkit-animation-name: swing;
+            -moz-animation-name: swing;
+            -o-animation-name: swing;
+            animation-name: swing;
+        }
+        
+        .main {
+            position: relative;
+            display: block;
+            top: 50px;
+            left: 0;
+            padding: 15px;
+            padding-left: 75px;
+            -webkit-transition: all 0.2s ease-in-out;
+            transition: all 0.2s ease-in-out;
+        }
+        
+        .main.active {
+            padding-left: 275px;
+            -webkit-transition: all 0.2s ease-in-out;
+            transition: all 0.2s ease-in-out;
+        }
+        
+        .main .jumbotron {
+            background-color: #fff;
+            padding: 30px !important;
+            border: 1px solid #dfe8f1;
+            -webkit-border-radius: 3px;
+            -moz-border-radius: 3px;
+            border-radius: 3px;
+        }
+        
+        .main .jumbotron h1 {
+            font-size: 24px;
+            margin: 0;
+            padding: 0;
+            margin-bottom: 12px;
+        }
+        
+        @-webkit-keyframes swing {
+            20% {
+                -webkit-transform: rotate3d(0, 0, 1, 15deg);
+                transform: rotate3d(0, 0, 1, 15deg);
+            }
+            40% {
+                -webkit-transform: rotate3d(0, 0, 1, -10deg);
+                transform: rotate3d(0, 0, 1, -10deg);
+            }
+            60% {
+                -webkit-transform: rotate3d(0, 0, 1, 5deg);
+                transform: rotate3d(0, 0, 1, 5deg);
+            }
+            80% {
+                -webkit-transform: rotate3d(0, 0, 1, -5deg);
+                transform: rotate3d(0, 0, 1, -5deg);
+            }
+            100% {
+                -webkit-transform: rotate3d(0, 0, 1, 0deg);
+                transform: rotate3d(0, 0, 1, 0deg);
+            }
+        }
+        
+        @keyframes swing {
+            20% {
+                -webkit-transform: rotate3d(0, 0, 1, 15deg);
+                -ms-transform: rotate3d(0, 0, 1, 15deg);
+                transform: rotate3d(0, 0, 1, 15deg);
+            }
+            40% {
+                -webkit-transform: rotate3d(0, 0, 1, -10deg);
+                -ms-transform: rotate3d(0, 0, 1, -10deg);
+                transform: rotate3d(0, 0, 1, -10deg);
+            }
+            60% {
+                -webkit-transform: rotate3d(0, 0, 1, 5deg);
+                -ms-transform: rotate3d(0, 0, 1, 5deg);
+                transform: rotate3d(0, 0, 1, 5deg);
+            }
+            80% {
+                -webkit-transform: rotate3d(0, 0, 1, -5deg);
+                -ms-transform: rotate3d(0, 0, 1, -5deg);
+                transform: rotate3d(0, 0, 1, -5deg);
+            }
+            100% {
+                -webkit-transform: rotate3d(0, 0, 1, 0deg);
+                -ms-transform: rotate3d(0, 0, 1, 0deg);
+                transform: rotate3d(0, 0, 1, 0deg);
+            }
+        }
+        
+        .swing {
+            -webkit-transform-origin: top center;
+            -ms-transform-origin: top center;
+            transform-origin: top center;
+            -webkit-animation-name: swing;
+            animation-name: swing;
+        }
+        
+        .stopka {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            margin-left: -200px;
+            width: 400px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <a href="#" id="menu-action">
+            <i class="fas fa-bars"></i>
+            <span>Zamknij</span>
+        </a>
+        <div class="logo">
+            Panel zarządzania serwerem
+        </div>
+    </div>
+    <div class="sidebar">
+        <ul>
+            <li><a href="#"><i class="fas fa-tachometer-alt"></i><span>Przegląd</span></a></li>
+            <li><a href="#"><i class="fas fa-users"></i><span>Zarządzanie postaciami</span></a></li>
+            <li><a href="#"><i class="fas fa-suitcase"></i><span>Zarządzanie frakcjami</span></a></li>
+            <li><a href="#"><i class="fas fa-home"></i><span>Whitelist</span></a></li>
+            <li><a href="#"><i class="fas fa-gamepad"></i><span>Gra</span></a></li>
+    </div>
+
+    <!-- Content -->
+    <div class="main">
+        <div class="hipsum">
+            <div class="jumbotron">
+                <h1 id="hello,-world!">Hej, SNARX!<a class="anchorjs-link" href="#hello,-world!"><span class="anchorjs-icon"></span></a></h1>
+                <p>Znajdujesz się w testowym panelu zarządzania Twoją postacią - jeśli zauważysz jakiś błąd, zgłoś go Web Developer na Discord.</p>
+                <p>
+                    <spa class="btn btn-primary" href="#" role="button">Przenieś mnie!</spa>
+                </p>
+            </div>
+            <p>Poniżej możesz zauważyć osoby które niedawno złożyły podania na Whitelist.</p>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Imię i nazwisko postaci</th>
+                        <th>Nick z Discord</th>
+                        <th>Nick z Forum</th>
+                        <th>Data wysłania</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>Mark</td>
+                        <td>Diesel</td>
+                        <td>SNARX</td>
+                        <td>Przyjmij albo odrzuć</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">2</th>
+                        <td>Justin</td>
+                        <td>Case</td>
+                        <td>Magister</td>
+                        <td>STEAM_0:0:1999734</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">3</th>
+                        <td>John</td>
+                        <td>Buxton</td>
+                        <td>D3v</td>
+                        <td>STEAM_0:0:1999734</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        $(function() {
+            $.get("http://127.0.0.1:8080/user").done(function(data) {
+                console.log(data)
+                $("tbody > tr").html("");
+                let tbody = ""
+                for (let i = 0; i < data.users.length; i++)
+                    tbody += '<tr><th scope="row">' + data.users[i]._id + '</th> <td>' + data.users[i].firstName + '</td> <td>' + data.users[i].lastname + '</td> <td><img src="' + data.users[i].avatar + '" width="100%"></td> <td>' + data.users[i].createdAt + '</td></tr>'
+                $("tbody").html(tbody);
+            })
+        })
+    </script>
+</body>
+
+</html>
